@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <title>Please sign up</title>
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-/Y6pD6FV/Vv2HJnA6t+vslU6fwYXjCFtcEpHbNJ0lyAFsXTsjBbfaDjzALeQsN6M" crossorigin="anonymous">
+    <link href="https://getbootstrap.com/docs/4.0/examples/signin/signin.css" rel="stylesheet" crossorigin="anonymous"/>
+</head>
+<body>
+<div class="container">
+    <form class="form-signin" method="post" th:object="${tempUser}" th:action="@{/registration/client}">
+        <h2 class="form-signin-heading">Please sign up</h2>
+        <p>
+            <label for="email" class="sr-only">Email</label>
+            <span style="color: red" th:if="${#fields.hasErrors('email')}" th:errors="*{email}"></span>
+            <input type="text" id="email" name="email" class="form-control" placeholder="Email" th:field="*{email}">
+        </p>
+        <p>
+            <label for="password" class="sr-only">Password</label>
+            <span style="color: red" th:if="${#fields.hasErrors('password')}" th:errors="*{password}"></span>
+            <input type="password" id="password" name="password" class="form-control" placeholder="Password" th:field="*{password}">
+        </p>
+        <p>
+            <label for="confirmPassword" class="sr-only">confirmPassword</label>
+            <span style="color: red" th:if="${#fields.hasErrors('confirmPassword')}" th:errors="*{confirmPassword}"></span>
+            <input type="password" id="confirmPassword" name="confirmPassword" class="form-control" placeholder="Confirm password" th:field="*{confirmPassword}">
+        </p>
+        <p>
+            <label for="name" class="sr-only">Name</label>
+            <span style="color: red" th:if="${#fields.hasErrors('name')}" th:errors="*{name}"></span>
+            <input type="text" id="name" name="name" class="form-control" placeholder="Name" th:field="*{name}">
+        </p>
+        <p>
+            <label for="surname" class="sr-only">Surname</label>
+            <span style="color: red" th:if="${#fields.hasErrors('surname')}" th:errors="*{surname}"></span>
+            <input type="text" id="surname" name="surname" class="form-control" placeholder="Surname" th:field="*{surname}">
+        </p>
+        <p>
+            <label for="phone" class="sr-only">Phone</label>
+            <span style="color: red" th:if="${#fields.hasErrors('phone')}" th:errors="*{phone}"></span>
+            <input type="text" id="phone" name="phone" class="form-control" placeholder="Phone" th:field="*{phone}">
+        </p>
+        <input name="_csrf" type="hidden" value="cc75d865-a84e-4afc-a01d-f55be3951085" />
+        <button class="btn btn-lg btn-primary btn-block" type="submit">Sing up</button>
+    </form>
+</div>
+</body>
+</html>

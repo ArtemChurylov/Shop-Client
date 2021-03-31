@@ -4,6 +4,7 @@ import com.example.shopclient.security.model.Client;
 import com.example.shopclient.security.model.Seller;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
+import java.util.Date;
 import java.util.Set;
 
 public class Product {
@@ -28,6 +29,9 @@ public class Product {
 
     @JsonProperty("seller")
     private Seller seller;
+
+    @JsonProperty("date_of_adding")
+    private Date date_of_adding;
 
     public Product() {
     }
@@ -86,5 +90,13 @@ public class Product {
 
     public void setSeller(Seller seller) {
         this.seller = seller;
+    }
+
+    public Date getDate_of_adding() {
+        return date_of_adding;
+    }
+
+    public void setDate_of_adding(Date date_of_adding) {
+        this.date_of_adding = date_of_adding;
     }
 }

@@ -12,7 +12,7 @@
 <body>
 <div class="container">
     <form class="form-signin" method="post" th:object="${tempUser}" th:action="@{/registration/client}">
-        <h2 class="form-signin-heading">Please sign up</h2>
+        <h2 class="form-signin-heading">Create client account</h2>
         <p>
             <label for="email" class="sr-only">Email</label>
             <span style="color: red" th:if="${#fields.hasErrors('email')}" th:errors="*{email}"></span>
@@ -43,8 +43,12 @@
             <span style="color: red" th:if="${#fields.hasErrors('phone')}" th:errors="*{phone}"></span>
             <input type="text" id="phone" name="phone" class="form-control" placeholder="Phone" th:field="*{phone}">
         </p>
-        <input name="_csrf" type="hidden" value="cc75d865-a84e-4afc-a01d-f55be3951085" />
-        <button class="btn btn-lg btn-primary btn-block" type="submit">Sing up</button>
+        <p>
+            <input name="_csrf" type="hidden" value="cc75d865-a84e-4afc-a01d-f55be3951085" />
+            <button class="w-100 btn btn-outline-primary" type="submit">Sing up</button>
+        </p>
+
+        <a th:href="@{/registration/seller}" class="w-100 btn btn-outline-warning">Sign-up as seller</a>
     </form>
 </div>
 </body>

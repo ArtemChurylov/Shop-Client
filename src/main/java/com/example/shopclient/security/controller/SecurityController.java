@@ -23,11 +23,6 @@ public class SecurityController {
         return "security/loginPage";
     }
 
-    @GetMapping("/registration")
-    public String chooseRegisterType() {
-        return "security/registration";
-    }
-
     @GetMapping("/registration/client")
     public String registrationClientPage(TempUser tempUser) {
         return "security/registrationClientPage";

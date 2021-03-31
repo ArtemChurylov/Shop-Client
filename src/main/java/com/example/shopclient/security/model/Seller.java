@@ -3,9 +3,11 @@ package com.example.shopclient.security.model;
 import com.example.shopclient.application.model.Product;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
 import java.util.Collection;
+import java.util.Collections;
 import java.util.List;
 
 public class Seller implements UserDetails {
@@ -39,7 +41,7 @@ public class Seller implements UserDetails {
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
-        return null;
+        return Collections.singletonList(new SimpleGrantedAuthority("ROLE_"+role.name()));
     }
 
     @Override

@@ -28,11 +28,10 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     @Override
     protected void configure(HttpSecurity http) throws Exception {
         http.authorizeRequests()
-                .antMatchers("/").permitAll()
                 .antMatchers("/registration/**").permitAll()
                 .anyRequest().authenticated()
                 .and()
-                .formLogin().loginPage("/login").defaultSuccessUrl("/main", true).permitAll()
+                .formLogin().loginPage("/login").defaultSuccessUrl("/", true).permitAll()
                 .and()
                 .logout().permitAll();
     }

@@ -1,10 +1,15 @@
 package com.example.shopclient.security.model;
 
 
+import com.example.shopclient.security.validation.ConfirmPassword;
+import com.example.shopclient.security.validation.UniqueEmail;
+
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.Size;
 
+@UniqueEmail
+@ConfirmPassword
 public class TempUser {
 
     @NotEmpty

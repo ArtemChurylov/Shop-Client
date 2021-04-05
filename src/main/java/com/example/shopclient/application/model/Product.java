@@ -1,9 +1,12 @@
 package com.example.shopclient.application.model;
 
+import com.example.shopclient.application.validation.Price;
 import com.example.shopclient.security.model.Client;
 import com.example.shopclient.security.model.Seller;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
+import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.Size;
 import java.util.Date;
 import java.util.Set;
 
@@ -12,15 +15,22 @@ public class Product {
     @JsonProperty("id")
     private Long id;
 
+    @NotEmpty
+    @Size(min = 5, max = 40, message = "Size should be between 5 and 40 characters")
     @JsonProperty("title")
     private String title;
 
+    @NotEmpty
+    @Price
     @JsonProperty("price")
-    private Integer price;
+    private String price;
 
+    @NotEmpty
+    @Size(max = 1000, message = "Max size is 1000 characters")
     @JsonProperty("description")
     private String description;
 
+    @NotEmpty
     @JsonProperty("category")
     private String category;
 
@@ -32,6 +42,9 @@ public class Product {
 
     @JsonProperty("date_of_adding")
     private Date date_of_adding;
+
+    @JsonProperty("image")
+    private String image;
 
     public Product() {
     }
@@ -52,11 +65,11 @@ public class Product {
         this.title = title;
     }
 
-    public Integer getPrice() {
+    public String getPrice() {
         return price;
     }
 
-    public void setPrice(Integer price) {
+    public void setPrice(String price) {
         this.price = price;
     }
 
@@ -98,5 +111,13 @@ public class Product {
 
     public void setDate_of_adding(Date date_of_adding) {
         this.date_of_adding = date_of_adding;
+    }
+
+    public String getImage() {
+        return image;
+    }
+
+    public void setImage(String image) {
+        this.image = image;
     }
 }

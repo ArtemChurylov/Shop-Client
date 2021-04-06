@@ -1,42 +1,18 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml" xmlns:sec="http://www.w3.org/1999/xhtml">
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.w3.org/1999/xhtml">
 <head>
     <meta charset="UTF-8">
-    <title>MyCoolApp</title>
-    <link rel="stylesheet" href="style.css">
+    <title>Title</title>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta3/dist/js/bootstrap.bundle.min.js" integrity="sha384-JEW9xMcG8R+pH31jmWH6WWP0WintQrMb4s7ZOdauHnUtxwoG2vI5DkLtS3qm9Ekf" crossorigin="anonymous"></script>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-giJF6kkoqNQ00vy+HMDP7azOuL0xtbfIcaT9wjKHr8RbDVddVHyTfAAsrekwKmP1" crossorigin="anonymous">
 </head>
-
-<div>
+<div th:fragment="header">
     <header class="d-flex flex-column flex-md-row align-items-center p-3 px-md-4 mb-3 bg-white border-bottom shadow-sm">
         <a href="/" class="d-flex align-items-center mb-2 mb-lg-0 text-dark text-decoration-none">
             Home
         </a>
 
-        <ul style="margin-left: 20px" class="nav col-12 col-lg-auto me-lg-auto mb-2 justify-content-center mb-md-0">
-           <div class="dropdown">
-                <a class="nav-link px-2 link-success" type="button" id="dropdownMenuButton" data-bs-toggle="dropdown" aria-expanded="false">
-                    Filter
-                </a>
-                <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                    <li><a class="dropdown-item" href="#">Footwear</a></li>
-                    <li><a class="dropdown-item" href="#">Clothes</a></li>
-                    <li><a class="dropdown-item" href="#">Accessories</a></li>
-                    <li><a class="dropdown-item" href="#">Cosmetics</a></li>
-                </ul>
-            </div>
-
-            <div sec:authorize="hasRole('ROLE_SELLER')">
-                <li><a th:href="@{/product/add}" class="nav-link px-2 link-primary">Add product</a></li>
-            </div>
-        </ul>
-
-        <form class="col-12 col-lg-auto mb-3 mb-lg-0 me-lg-3">
-            <input type="search" class="form-control" placeholder="Search...">
-        </form>
-
-        <div class="dropdown">
+        <div style="margin-left: 1350px" class="dropdown">
             <button class="btn btn-light dropdown-toggle" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
                 More
             </button>
@@ -60,13 +36,29 @@
 </div>
 <body>
 
-<div class="grid">
-    <div th:each="product : ${products}">
-        <img th:src="'data:image/jpeg;base64,' + ${product.getImage()}">
-        <h2 style="margin-top: 5px" th:text="${product.getTitle()}"></h2>
-        <h2 style="margin-top: 5px" th:text="${product.getPrice()} + 'zł'"></h2>
-    </div>
-</div>
-
+<form class="container">
+    <table class="table">
+        <h3 style="color: black">User details</h3>
+        <tbody>
+        <tr class="TableRow__TableRowElement-nly8t1-0 kTgwlZ">
+            <td class="sc-idOhPF kGntgQ">Email</td>
+            <td data-hj-suppress="true" class="sc-dIUggk XavQL" th:text="${user.getEmail()}"></td></tr>
+        <tr class="TableRow__TableRowElement-nly8t1-0 kTgwlZ">
+            <td class="sc-idOhPF kGntgQ">First Name</td>
+            <td data-hj-suppress="true" class="sc-dIUggk XavQL" th:text="${user.getName()}"></td>
+        </tr>
+        <tr class="TableRow__TableRowElement-nly8t1-0 kTgwlZ">
+            <td class="sc-idOhPF kGntgQ">Last Name</td>
+            <td data-hj-suppress="true" class="sc-dIUggk XavQL" th:text="${user.getSurname()}"></td>
+        </tr>
+        <tr class="TableRow__TableRowElement-nly8t1-0 kTgwlZ">
+            <td class="sc-idOhPF kGntgQ">Phone</td>
+            <td data-hj-suppress="true" class="sc-dIUggk XavQL" th:text="${user.getPhone()}"></td>
+        </tr>
+        </tbody>
+    </table>
+    <a th:href="@{/user/update}" class="btn btn-outline-primary">Edit profile</a>
+    <a href="#" class="btn btn-outline-primary">Change password</a>
+</form>
 </body>
 </html>

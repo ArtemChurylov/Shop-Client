@@ -68,7 +68,6 @@ public class SecurityController {
     @PostMapping("/user/update")
     public String updateProfile(@Valid TempUser tempUser, BindingResult result, Model model) {
         if (result.hasErrors()) {
-            System.out.println(result.getAllErrors());
             try {
                 Client client = (Client) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
                 model.addAttribute("user", client);
@@ -81,7 +80,7 @@ public class SecurityController {
             return "security/updateProfile";
         }
 
-        // Logic
+        userService.updateUser(tempUser);
 
         return "redirect:/profile";
     }

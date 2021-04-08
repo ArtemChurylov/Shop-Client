@@ -2,6 +2,7 @@ package com.example.shopclient.security.service;
 
 import com.example.shopclient.security.model.*;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -93,6 +94,27 @@ public class UserServiceImpl implements UserService {
         map.put("id", id);
 
         restTemplate.delete(sellerPathWithId, map);
+    }
+
+    @Override
+    public void updateUser(TempUser tempUser) {
+        try {
+            Client client = (Client) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+            client.setEmail(tempUser.getEmail());
+            client.setName(tempUser.getName());
+            client.setSurname(tempUser.getSurname());
+            client.setPhone(tempUser.getPhone());
+            restTemplate.put(clientPath, client, Client.class);
+        }catch (Exception e) {
+            try {
+                Seller seller = (Seller) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+                seller.setEmail(tempUser.getEmail());
+                seller.setName(tempUser.getName());
+                seller.setSurname(tempUser.getSurname());
+                seller.setPhone(tempUser.getPhone());
+                restTemplate.put(sellerPath, seller, Seller.class);
+            }catch (Exception e1) { throw new IllegalStateException(e1); }
+        }
     }
 
     @Override

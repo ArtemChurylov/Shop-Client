@@ -16,6 +16,8 @@ public class ConfirmPasswordValidator implements ConstraintValidator<ConfirmPass
 
         boolean isValid = true;
 
+        if (tempUser.getPassword().equals("DefaultPasswordForUpdatingUser")) return true;
+
         // Just compare if password and confirm password are match
         if (tempUser.getPassword() != null && tempUser.getPassword().length() >= 6
                 && tempUser.getConfirmPassword() != null && tempUser.getConfirmPassword().length() >= 6) {

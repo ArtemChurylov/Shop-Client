@@ -81,9 +81,6 @@ public class SecurityController {
             return "security/updateProfile";
         }
 
-        System.out.println(tempUser.getEmail());
-        System.out.println(tempUser.getPassword());
-
         // Logic
 
         return "redirect:/profile";

@@ -1,6 +1,7 @@
 package com.example.shopclient.security.model;
 
 
+import com.example.shopclient.security.validation.ConfirmDBPassword;
 import com.example.shopclient.security.validation.ConfirmPassword;
 import com.example.shopclient.security.validation.UniqueEmail;
 
@@ -33,6 +34,7 @@ public class TempUser {
     @Size(min = 6, max = 50)
     private String password;
 
+    @ConfirmDBPassword
     @NotEmpty
     @Size(min = 6, max = 50)
     private String confirmPassword;

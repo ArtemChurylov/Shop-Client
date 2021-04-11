@@ -39,8 +39,11 @@
             <input hidden th:value="${'DefaultPasswordForUpdatingUser'}" type="password" id="password" name="password" class="form-control" placeholder="Password">
         </p>
         <p>
-            <span style="color: red" th:if="${#fields.hasErrors('confirmPassword')}" th:errors="*{confirmPassword}"></span>
-            <input type="password" id="confirmPassword" name="confirmPassword" class="form-control" placeholder="Confirm password">
+            <input hidden th:value="${'DefaultPasswordForUpdatingUser'}" type="password" id="confirmPassword" name="confirmPassword" class="form-control" placeholder="Password">
+        </p>
+        <p>
+            <span style="color: red" th:if="${#fields.hasErrors('confirmDBPassword')}" th:errors="*{confirmDBPassword}"></span>
+            <input type="password" id="confirmDBPassword" name="confirmDBPassword" class="form-control" placeholder="Confirm password">
         </p>
         <input name="_csrf" type="hidden" value="cc75d865-a84e-4afc-a01d-f55be3951085" />
         <button class="btn btn-lg btn-primary btn-block" type="submit">Update</button>

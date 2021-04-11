@@ -118,6 +118,21 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
+    public void changePassword(TempUser tempUser) {
+        try {
+            Client client = (Client) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+            client.setPassword(passwordEncoder.encode(tempUser.getPassword()));
+            restTemplate.put(clientPath, client, Client.class);
+        }catch (Exception e) {
+            try {
+                Seller seller = (Seller) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+                seller.setPassword(passwordEncoder.encode(tempUser.getPassword()));
+                restTemplate.put(sellerPath, seller, Seller.class);
+            }catch (Exception e1) { throw new IllegalStateException(e1); }
+        }
+    }
+
+    @Override
     public UserDetails loadUserByUsername(String email) throws UsernameNotFoundException {
         Optional<Client> client = getAllClients().stream().filter(c -> c.getEmail().equals(email)).findFirst();
         if (client.isPresent()) return client.get();

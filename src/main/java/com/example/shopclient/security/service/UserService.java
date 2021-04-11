@@ -19,4 +19,6 @@ public interface UserService extends UserDetailsService {
     void deleteSellerById(Long id);
 
     void updateUser(TempUser tempUser);
+
+    void changePassword(TempUser tempUser);
 }

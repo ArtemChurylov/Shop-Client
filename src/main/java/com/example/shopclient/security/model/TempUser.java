@@ -34,10 +34,14 @@ public class TempUser {
     @Size(min = 6, max = 50)
     private String password;
 
-    @ConfirmDBPassword
     @NotEmpty
     @Size(min = 6, max = 50)
     private String confirmPassword;
+
+    @ConfirmDBPassword
+    @NotEmpty
+    @Size(min = 6, max = 50)
+    private String confirmDBPassword;
 
     public TempUser() {
     }
@@ -88,5 +92,13 @@ public class TempUser {
 
     public void setConfirmPassword(String confirmPassword) {
         this.confirmPassword = confirmPassword;
+    }
+
+    public String getConfirmDBPassword() {
+        return confirmDBPassword;
+    }
+
+    public void setConfirmDBPassword(String confirmDBPassword) {
+        this.confirmDBPassword = confirmDBPassword;
     }
 }

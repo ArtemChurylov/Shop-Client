@@ -85,4 +85,19 @@ public class SecurityController {
         return "redirect:/profile";
     }
 
+    @GetMapping("/user/changePassword")
+    public String changePasswordPage(TempUser tempUser) {
+        return "security/changePassword";
+    }
+
+    @PostMapping("/user/changePassword")
+    public String changePassword(@Valid TempUser tempUser, BindingResult result) {
+
+        if (result.hasErrors()) return "security/changePassword";
+
+        userService.changePassword(tempUser);
+
+        return "redirect:/profile";
+    }
+
 }

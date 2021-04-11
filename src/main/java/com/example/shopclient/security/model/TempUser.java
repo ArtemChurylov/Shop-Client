@@ -3,6 +3,7 @@ package com.example.shopclient.security.model;
 
 import com.example.shopclient.security.validation.ConfirmDBPassword;
 import com.example.shopclient.security.validation.ConfirmPassword;
+import com.example.shopclient.security.validation.PhoneNumber;
 import com.example.shopclient.security.validation.UniqueEmail;
 
 import javax.validation.constraints.Email;
@@ -26,6 +27,7 @@ public class TempUser {
     @Size(min = 3, max = 50)
     private String surname;
 
+    @PhoneNumber
     @NotEmpty
     @Size(min = 6, max = 25)
     private String phone;

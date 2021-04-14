@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <title>Please sign up</title>
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-/Y6pD6FV/Vv2HJnA6t+vslU6fwYXjCFtcEpHbNJ0lyAFsXTsjBbfaDjzALeQsN6M" crossorigin="anonymous">
+    <link href="https://getbootstrap.com/docs/4.0/examples/signin/signin.css" rel="stylesheet" crossorigin="anonymous"/>
+</head>
+<body>
+<div class="container">
+    <form class="form-signin" method="post" th:object="${address}" th:action="'/product/buy/' + ${id}">
+        <h2 class="form-signin-heading">Enter your address data</h2>
+        <p>
+            <span style="color: red" th:if="${#fields.hasErrors('country')}" th:errors="*{country}"></span>
+            <input type="text" id="country" name="country" class="form-control" placeholder="Country" th:field="*{country}">
+        </p>
+        <p>
+            <span style="color: red" th:if="${#fields.hasErrors('region')}" th:errors="*{region}"></span>
+            <input type="text" id="region" name="region" class="form-control" placeholder="Region" th:field="*{region}">
+        </p>
+        <p>
+            <span style="color: red" th:if="${#fields.hasErrors('city')}" th:errors="*{city}"></span>
+            <input type="text" id="city" name="city" class="form-control" placeholder="City" th:field="*{city}">
+        </p>
+        <p>
+            <span style="color: red" th:if="${#fields.hasErrors('post_office_number')}" th:errors="*{post_office_number}"></span>
+            <input type="text" id="post_office_number" name="post_office_number" class="form-control" placeholder="Post office number" th:field="*{post_office_number}">
+        </p>
+        <p>
+            <button class="w-100 btn btn-outline-primary" type="submit">Buy</button>
+        </p>
+    </form>
+</div>
+</body>
+</html>

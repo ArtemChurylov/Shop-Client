@@ -25,7 +25,7 @@
         </div>
 
         <div sec:authorize="hasRole('ROLE_CLIENT')">
-            <a style="margin-top: 50px" type="button" class="col-6 mx-auto btn btn-outline-dark">Buy now</a>
+            <a th:href="'/product/buy/' + ${product.getId()}" style="margin-top: 50px" type="button" class="col-6 mx-auto btn btn-outline-dark">Buy now</a>
         </div>
 
         <div style="margin-top: 50px">

@@ -122,12 +122,12 @@ public class UserServiceImpl implements UserService {
         try {
             Client client = (Client) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
             client.setPassword(passwordEncoder.encode(tempUser.getPassword()));
-            restTemplate.put(clientPath, client, Client.class);
+            restTemplate.postForEntity(clientPath, client, Client.class);
         }catch (Exception e) {
             try {
                 Seller seller = (Seller) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
                 seller.setPassword(passwordEncoder.encode(tempUser.getPassword()));
-                restTemplate.put(sellerPath, seller, Seller.class);
+                restTemplate.postForEntity(sellerPath, seller, Seller.class);
             }catch (Exception e1) { throw new IllegalStateException(e1); }
         }
     }

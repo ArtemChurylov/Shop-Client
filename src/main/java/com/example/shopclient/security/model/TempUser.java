@@ -41,8 +41,6 @@ public class TempUser {
     private String confirmPassword;
 
     @ConfirmDBPassword
-    @NotEmpty
-    @Size(min = 6, max = 50)
     private String confirmDBPassword;
 
     public TempUser() {

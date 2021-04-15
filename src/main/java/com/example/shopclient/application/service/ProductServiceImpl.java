@@ -68,7 +68,7 @@ public class ProductServiceImpl implements ProductService {
         Product product = getProductById(product_id);
         Seller seller = product.getSeller();
         notification.setSeller(seller);
-        notification.setText(client.getName() + " " + client.getSurname() + ", have ordered " + product.getDescription()
+        notification.setText(client.getName() + " " + client.getSurname() + " have ordered " + product.getDescription()
         + ".\nClient contacts:" + "\n" + " email - " + client.getEmail() + "\n" + " phone - " + client.getPhone()
         + ".\nAddress: \n country - " + address.getCountry() + "\n region - " + address.getRegion() + "\n city - " + address.getCity()
         + "\n post office number - " + address.getPost_office_number());

@@ -45,6 +45,11 @@
                     <li><a class="dropdown-item" href="#">My Orders</a></li>
                 </div>
 
+
+                <div sec:authorize="hasRole('ROLE_SELLER')">
+                    <li><a class="dropdown-item" href="/notifications">Notifications</a></li>
+                </div>
+
                 <div sec:authorize="hasRole('ROLE_SELLER')">
                     <li><a class="dropdown-item" href="#">My Products</a></li>
                 </div>

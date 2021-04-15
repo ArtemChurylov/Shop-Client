@@ -1,5 +1,6 @@
 package com.example.shopclient.security.model;
 
+import com.example.shopclient.application.model.Notification;
 import com.example.shopclient.application.model.Product;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import org.springframework.security.core.GrantedAuthority;
@@ -35,6 +36,9 @@ public class Seller implements UserDetails {
 
     @JsonProperty("products")
     private List<Product> products;
+
+    @JsonProperty("notifications")
+    private List<Notification> notifications;
 
     public Seller() {
     }
@@ -132,5 +136,13 @@ public class Seller implements UserDetails {
 
     public void setProducts(List<Product> products) {
         this.products = products;
+    }
+
+    public List<Notification> getNotifications() {
+        return notifications;
+    }
+
+    public void setNotifications(List<Notification> notifications) {
+        this.notifications = notifications;
     }
 }

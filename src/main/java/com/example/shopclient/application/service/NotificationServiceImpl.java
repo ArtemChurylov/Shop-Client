@@ -1,8 +1,6 @@
 package com.example.shopclient.application.service;
 
-import com.example.shopclient.application.model.Address;
 import com.example.shopclient.application.model.Notification;
-import com.example.shopclient.security.model.Client;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;

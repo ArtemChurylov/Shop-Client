@@ -3,6 +3,7 @@ package com.example.shopclient.application.controller;
 import com.example.shopclient.application.service.ProductService;
 import com.example.shopclient.security.model.Client;
 import com.example.shopclient.security.model.Seller;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -35,6 +36,14 @@ public class MainController {
             }catch (Exception e1) { throw new IllegalStateException(e1); }
         }
         return "application/profile";
+    }
+
+    @PreAuthorize("hasRole('SELLER')")
+    @GetMapping("/notifications")
+    public String notifications(Model model){
+        Seller seller = (Seller) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        model.addAttribute("notifications", seller.getNotifications());
+        return "application/notifications";
     }
 
     @GetMapping("/fileTypeException")

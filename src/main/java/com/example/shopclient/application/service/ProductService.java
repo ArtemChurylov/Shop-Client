@@ -6,7 +6,6 @@ import com.example.shopclient.security.model.Client;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.util.List;
-import java.util.Optional;
 
 public interface ProductService {
     void saveProduct(Product product, MultipartFile file);

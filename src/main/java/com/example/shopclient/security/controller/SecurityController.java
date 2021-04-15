@@ -34,6 +34,7 @@ public class SecurityController {
 
     @PostMapping("/registration/client")
     public String clientRegistration(@Valid TempUser tempUser, BindingResult result) {
+        System.out.println(result.getAllErrors());
         if (result.hasErrors()) return "security/registrationClientPage";
         userService.saveClient(tempUser);
         return "redirect:/";

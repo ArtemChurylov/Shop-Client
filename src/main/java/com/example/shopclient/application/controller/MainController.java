@@ -20,6 +20,10 @@ public class MainController {
 
     @GetMapping("/")
     public String mainPage(Model model) {
+        try {
+            Seller seller = (Seller) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+            model.addAttribute("notifications_number", seller.getNotifications().size());
+        }catch (Exception e){}
         model.addAttribute("products", productService.getAllProducts());
         return "application/mainPage";
     }
@@ -33,6 +37,7 @@ public class MainController {
             try {
                 Seller seller = (Seller) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
                 model.addAttribute("user", seller);
+                model.addAttribute("notifications_number", seller.getNotifications().size());
             }catch (Exception e1) { throw new IllegalStateException(e1); }
         }
         return "application/profile";
@@ -43,6 +48,7 @@ public class MainController {
     public String notifications(Model model){
         Seller seller = (Seller) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
         model.addAttribute("notifications", seller.getNotifications());
+        model.addAttribute("notifications_number", seller.getNotifications().size());
         return "application/notifications";
     }
 

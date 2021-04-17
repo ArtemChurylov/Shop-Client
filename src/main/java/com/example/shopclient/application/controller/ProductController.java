@@ -4,6 +4,7 @@ import com.example.shopclient.application.model.Address;
 import com.example.shopclient.application.model.Product;
 import com.example.shopclient.application.service.ProductService;
 import com.example.shopclient.security.model.Client;
+import com.example.shopclient.security.model.Seller;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
@@ -43,6 +44,10 @@ public class ProductController {
 
     @GetMapping("/{id}")
     public String showProduct(@PathVariable Long id, Model model) {
+        try {
+            Seller seller = (Seller) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+            model.addAttribute("notifications_number", seller.getNotifications().size());
+        }catch (Exception e){}
         Product product = productService.getProductById(id);
         model.addAttribute("product", product);
         return "application/product/showProduct";
@@ -61,5 +66,14 @@ public class ProductController {
         Client client = (Client) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
         productService.buyProduct(id, address, client);
         return "redirect:/";
+    }
+
+    @PreAuthorize("hasRole('SELLER')")
+    @GetMapping("/myProducts")
+    public String myProducts(Model model) {
+        Seller seller = (Seller) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        model.addAttribute("notifications_number", seller.getNotifications().size());
+        model.addAttribute("products", productService.getMyProducts(seller.getId()));
+        return "application/product/myProducts";
     }
 }

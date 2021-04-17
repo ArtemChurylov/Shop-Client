@@ -78,4 +78,13 @@ public class ProductServiceImpl implements ProductService {
         client.setOrders(null);
         notificationService.saveNotification(notification);
     }
+
+    @Override
+    public List<Product> getMyProducts(Long id) {
+        Map<String, Long> map = new HashMap<>();
+        map.put("id", id);
+
+        ResponseEntity<Product[]> responseEntity = restTemplate.getForEntity(productPathWithId+"/myProducts", Product[].class, map);
+        return Arrays.asList(responseEntity.getBody());
+    }
 }

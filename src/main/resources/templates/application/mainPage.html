@@ -28,7 +28,7 @@
             </div>
 
             <div sec:authorize="hasRole('ROLE_SELLER')">
-                <li><a th:href="@{/product/add}" class="nav-link px-2 link-primary">Add product</a></li>
+                <li><a th:href="@{/product/add}" style="margin-left: 560px" class="btn btn-outline-warning">Add product</a></li>
             </div>
         </ul>
 
@@ -47,11 +47,11 @@
 
 
                 <div sec:authorize="hasRole('ROLE_SELLER')">
-                    <li><a class="dropdown-item" href="/notifications">Notifications</a></li>
+                    <li><a class="dropdown-item" href="/notifications" th:text="'Notifications('+${notifications_number}+')'"></a></li>
                 </div>
 
                 <div sec:authorize="hasRole('ROLE_SELLER')">
-                    <li><a class="dropdown-item" href="#">My Products</a></li>
+                    <li><a class="dropdown-item" href="/product/myProducts">My Products</a></li>
                 </div>
 
                 <li><a class="dropdown-item" th:href="@{/profile}">Profile</a></li>

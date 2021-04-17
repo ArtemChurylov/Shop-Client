@@ -34,7 +34,6 @@ public class SecurityController {
 
     @PostMapping("/registration/client")
     public String clientRegistration(@Valid TempUser tempUser, BindingResult result) {
-        System.out.println(result.getAllErrors());
         if (result.hasErrors()) return "security/registrationClientPage";
         userService.saveClient(tempUser);
         return "redirect:/";
@@ -61,6 +60,7 @@ public class SecurityController {
             try {
                 Seller seller = (Seller) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
                 model.addAttribute("user", seller);
+                model.addAttribute("notifications_number", seller.getNotifications().size());
             }catch (Exception e1) { throw new IllegalStateException(e1); }
         }
         return "security/updateProfile";
@@ -87,7 +87,11 @@ public class SecurityController {
     }
 
     @GetMapping("/user/changePassword")
-    public String changePasswordPage(TempUser tempUser) {
+    public String changePasswordPage(TempUser tempUser, Model model) {
+        try {
+            Seller seller = (Seller) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+            model.addAttribute("notifications_number", seller.getNotifications().size());
+        }catch (Exception e){}
         return "security/changePassword";
     }
 

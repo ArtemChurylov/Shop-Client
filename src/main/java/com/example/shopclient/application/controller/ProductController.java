@@ -76,4 +76,31 @@ public class ProductController {
         model.addAttribute("products", productService.getMyProducts(seller.getId()));
         return "application/product/myProducts";
     }
+
+    @PreAuthorize("hasRole('SELLER')")
+    @GetMapping("/{id}/edit")
+    public String editProductPage(@PathVariable Long id, Model model) {
+        Product dbProduct = productService.getProductById(id);
+        model.addAttribute("product", dbProduct);
+        return "application/product/editProductPage";
+    }
+
+    @PostMapping("/{id}/edit")
+    public String editProduct(@Valid Product product, BindingResult result, MultipartFile file, @PathVariable Long id) {
+        if (result.hasErrors()) return "application/product/editProductPage";
+        if (!file.getOriginalFilename().equals("")) {
+            if (file.getOriginalFilename().endsWith(".jpg") || file.getOriginalFilename().endsWith(".png")) {
+                productService.updateProduct(product, file, id);
+            } else return "redirect:/fileTypeException";
+        }else productService.updateProduct(product, file, id);
+
+        return "redirect:/product/myProducts";
+    }
+
+    @PreAuthorize("hasRole('SELLER')")
+    @PostMapping("/{id}/delete")
+    public String deleteProduct(@PathVariable Long id) {
+        productService.deleteProductById(id);
+        return "redirect:/product/myProducts";
+    }
 }

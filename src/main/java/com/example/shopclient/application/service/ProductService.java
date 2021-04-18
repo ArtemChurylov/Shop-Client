@@ -12,6 +12,8 @@ public interface ProductService {
     List<Product> getAllProducts();
     Product getProductById(Long id);
     void deleteProductById(Long id);
+
     void buyProduct(Long product_id, Address address, Client client);
     List<Product> getMyProducts(Long id);
+    void updateProduct(Product product, MultipartFile file, Long id);
 }

@@ -109,10 +109,6 @@ public class Product {
         return date_of_adding;
     }
 
-    public void setDate_of_adding(Date date_of_adding) {
-        this.date_of_adding = date_of_adding;
-    }
-
     public String getImage() {
         return image;
     }

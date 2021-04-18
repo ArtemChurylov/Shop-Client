@@ -11,6 +11,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
 import org.springframework.web.multipart.MultipartFile;
 
+import java.io.IOException;
 import java.util.*;
 
 @Service
@@ -86,5 +87,23 @@ public class ProductServiceImpl implements ProductService {
 
         ResponseEntity<Product[]> responseEntity = restTemplate.getForEntity(productPathWithId+"/myProducts", Product[].class, map);
         return Arrays.asList(responseEntity.getBody());
+    }
+
+    @Override
+    public void updateProduct(Product product, MultipartFile file, Long id) {
+        Product dbProduct = getProductById(id);
+
+        if (!file.getOriginalFilename().equals("")) {
+            try {
+                dbProduct.setImage(Base64.getEncoder().encodeToString(file.getBytes()));
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
+        dbProduct.setTitle(product.getTitle());
+        dbProduct.setPrice(product.getPrice());
+        dbProduct.setDescription(product.getDescription());
+        dbProduct.setCategory(product.getCategory());
+        restTemplate.put(productPath, dbProduct, Product.class);
     }
 }

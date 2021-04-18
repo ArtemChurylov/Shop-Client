@@ -1,32 +1,29 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <meta name="description" content="">
-    <meta name="author" content="">
-    <title>Add Product</title>
+    <meta charset="UTF-8">
+    <title>Edit Product</title>
     <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-/Y6pD6FV/Vv2HJnA6t+vslU6fwYXjCFtcEpHbNJ0lyAFsXTsjBbfaDjzALeQsN6M" crossorigin="anonymous">
     <link href="https://getbootstrap.com/docs/4.0/examples/signin/signin.css" rel="stylesheet" crossorigin="anonymous"/>
 </head>
 <body>
 <div class="container">
-    <form class="form-signin" method="post" th:object="${product}" th:action="@{/product/add}" enctype="multipart/form-data">
+    <form class="form-signin" method="post" th:object="${product}" th:action="@{'/product/' + ${product.getId()} + '/edit'}" enctype="multipart/form-data">
         <h2 class="form-signin-heading">Enter data</h2>
         <p>
             <label for="title" class="sr-only">Title</label>
             <span style="color: red" th:if="${#fields.hasErrors('title')}" th:errors="*{title}"></span>
-            <input type="text" id="title" name="title" class="form-control" placeholder="Title" th:field="*{title}">
+            <input th:value="${product.getTitle()}" type="text" id="title" name="title" class="form-control" placeholder="Title">
         </p>
         <p>
             <label for="price" class="sr-only">Price</label>
             <span style="color: red" th:if="${#fields.hasErrors('price')}" th:errors="*{price}"></span>
-            <input type="text" id="price" name="price" class="form-control" placeholder="Price" th:field="*{price}">
+            <input th:value="${product.getPrice()}" type="text" id="price" name="price" class="form-control" placeholder="Price">
         </p>
         <p>
             <label for="description" class="sr-only">Description</label>
             <span style="color: red" th:if="${#fields.hasErrors('description')}" th:errors="*{description}"></span>
-            <textarea type="text" id="description" name="description" class="form-control" placeholder="Description" th:field="*{description}"></textarea>
+            <textarea th:text="${product.getDescription()}" type="text" id="description" name="description" class="form-control" placeholder="Description"></textarea>
         </p>
         <p>
             <label for="category" class="sr-only">Category</label>
@@ -41,12 +38,11 @@
             </select>
         </p>
         <p>
-        <h8 style="color: red">Image(file should have type of jpg or png)</h8>
-            <input type="file" id="file" name="file" class="form-control" placeholder="Image" required>
+            <h8 style="color: red">Image(file should have type of jpg or png)</h8>
+            <input type="file" id="file" name="file" class="form-control" placeholder="Image">
         </p>
         <p>
-            <input name="_csrf" type="hidden" value="cc75d865-a84e-4afc-a01d-f55be3951085" />
-            <button class="w-100 btn btn-outline-primary" type="submit">Add Product</button>
+            <button class="w-100 btn btn-outline-primary" type="submit">Edit Product</button>
         </p>
     </form>
 </div>

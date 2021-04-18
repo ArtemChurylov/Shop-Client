@@ -39,8 +39,8 @@
             <h5 style="margin-top: 5px" th:text="${product.getTitle()}"></h5>
             <h5 style="margin-top: 5px" th:text="${product.getPrice()} + 'zł'"></h5>
         </div></a>
-        <a class="btn btn-outline-warning">Edit product</a>
-        <form style="margin-top: -38px; margin-left: 120px">
+        <a th:href="'/product/' + ${product.getId()} + '/edit'" class="btn btn-outline-warning">Edit product</a>
+        <form method="post" th:action="@{'/product/' + ${product.getId()} + '/delete'}" onclick="return confirm('Are you sure you want to delete this product?');" style="margin-top: -38px; margin-left: 120px">
             <button type="submit" class="btn btn-outline-danger">Delete</button>
         </form>
     </div>

@@ -28,6 +28,15 @@ public class MainController {
         return "application/mainPage";
     }
 
+    @PreAuthorize("hasRole('CLIENT')")
+    @GetMapping("congratulationsPage")
+    public String congratulationsPage(Model model) {
+        Client client = (Client) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        model.addAttribute("name", client.getName());
+        model.addAttribute("surname", client.getSurname());
+        return "/application/congratulationsPage";
+    }
+
     @GetMapping("/profile")
     public String profileDetails(Model model) {
         try {

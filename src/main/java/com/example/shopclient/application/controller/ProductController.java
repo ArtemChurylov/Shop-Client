@@ -65,7 +65,7 @@ public class ProductController {
         if (result.hasErrors()) return "application/product/buyProductPage";
         Client client = (Client) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
         productService.buyProduct(id, address, client);
-        return "redirect:/";
+        return "redirect:/congratulationsPage";
     }
 
     @PreAuthorize("hasRole('SELLER')")
@@ -102,5 +102,13 @@ public class ProductController {
     public String deleteProduct(@PathVariable Long id) {
         productService.deleteProductById(id);
         return "redirect:/product/myProducts";
+    }
+
+    @PreAuthorize("hasRole('CLIENT')")
+    @GetMapping("/myOrders")
+    public String showClientOrders(Model model) {
+        Client client = (Client) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        model.addAttribute("orders", productService.getMyOrders(client.getId()));
+        return "application/product/myOrders";
     }
 }

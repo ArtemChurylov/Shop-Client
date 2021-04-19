@@ -14,6 +14,8 @@ public interface ProductService {
     void deleteProductById(Long id);
 
     void buyProduct(Long product_id, Address address, Client client);
+    List<Product> getMyOrders(Long id);
+
     List<Product> getMyProducts(Long id);
     void updateProduct(Product product, MultipartFile file, Long id);
 }

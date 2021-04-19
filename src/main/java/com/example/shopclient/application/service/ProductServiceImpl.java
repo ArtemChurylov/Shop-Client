@@ -70,14 +70,23 @@ public class ProductServiceImpl implements ProductService {
         Seller seller = product.getSeller();
         notification.setSeller(seller);
         notification.setText(client.getName() + " " + client.getSurname() + " have ordered " + product.getDescription()
-        + ".\nClient contacts:" + "\n" + " email - " + client.getEmail() + "\n" + " phone - " + client.getPhone()
-        + ".\nAddress: \n country - " + address.getCountry() + "\n region - " + address.getRegion() + "\n city - " + address.getCity()
-        + "\n post office number - " + address.getPost_office_number());
+        + ". Client contacts:" + " email - " + client.getEmail() + ", phone - " + client.getPhone()
+        + ". Address: country - " + address.getCountry() + ", region - " + address.getRegion() + ", city - " + address.getCity()
+        + ", post office number - " + address.getPost_office_number());
 
         client.setOrders(Collections.singletonList(product));
         restTemplate.put(clientPath, client, Client.class);
         client.setOrders(null);
         notificationService.saveNotification(notification);
+    }
+
+    @Override
+    public List<Product> getMyOrders(Long id) {
+        Map<String, Long> map = new HashMap<>();
+        map.put("id", id);
+
+        ResponseEntity<Product[]> responseEntity = restTemplate.getForEntity(productPathWithId+"/myOrders", Product[].class, map);
+        return Arrays.asList(responseEntity.getBody());
     }
 
     @Override

@@ -15,7 +15,7 @@
             <div class="card-body">
                 <h5 class="card-title">Notification</h5>
                 <p class="card-text" th:text="${notification.getText()}"></p>
-                <form method="post" th:action="'/deleteNotification/' + ${notification.getId()}">
+                <form method="post" th:action="'/deleteNotification/' + ${notification.getId()}" onclick="return confirm('Are you sure you want to delete this notification?');">
                     <button class="btn btn-outline-danger" type="submit">Delete</button>
                 </form>
             </div>

@@ -60,7 +60,7 @@ public class SecurityController {
             try {
                 Seller seller = (Seller) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
                 model.addAttribute("user", seller);
-                model.addAttribute("notifications_number", seller.getNotifications().size());
+                model.addAttribute("notifications_number", seller.getNotificationCount());
             }catch (Exception e1) { throw new IllegalStateException(e1); }
         }
         return "security/updateProfile";
@@ -90,7 +90,7 @@ public class SecurityController {
     public String changePasswordPage(TempUser tempUser, Model model) {
         try {
             Seller seller = (Seller) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-            model.addAttribute("notifications_number", seller.getNotifications().size());
+            model.addAttribute("notifications_number", seller.getNotificationCount());
         }catch (Exception e){}
         return "security/changePassword";
     }

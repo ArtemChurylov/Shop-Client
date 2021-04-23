@@ -40,6 +40,9 @@ public class Seller implements UserDetails {
     @JsonProperty("notifications")
     private List<Notification> notifications;
 
+    @JsonProperty("notificationCount")
+    private Integer notificationCount;
+
     public Seller() {
     }
 
@@ -144,5 +147,13 @@ public class Seller implements UserDetails {
 
     public void setNotifications(List<Notification> notifications) {
         this.notifications = notifications;
+    }
+
+    public Integer getNotificationCount() {
+        return notificationCount;
+    }
+
+    public void setNotificationCount(Integer notificationCount) {
+        this.notificationCount = notificationCount;
     }
 }

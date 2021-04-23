@@ -46,7 +46,7 @@ public class ProductController {
     public String showProduct(@PathVariable Long id, Model model) {
         try {
             Seller seller = (Seller) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-            model.addAttribute("notifications_number", seller.getNotifications().size());
+            model.addAttribute("notifications_number", seller.getNotificationCount());
         }catch (Exception e){}
         Product product = productService.getProductById(id);
         model.addAttribute("product", product);
@@ -72,7 +72,7 @@ public class ProductController {
     @GetMapping("/myProducts")
     public String myProducts(Model model) {
         Seller seller = (Seller) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-        model.addAttribute("notifications_number", seller.getNotifications().size());
+        model.addAttribute("notifications_number", seller.getNotificationCount());
         model.addAttribute("products", productService.getMyProducts(seller.getId()));
         return "application/product/myProducts";
     }

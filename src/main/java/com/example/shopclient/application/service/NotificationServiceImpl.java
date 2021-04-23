@@ -1,6 +1,7 @@
 package com.example.shopclient.application.service;
 
 import com.example.shopclient.application.model.Notification;
+import com.example.shopclient.security.model.Seller;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
@@ -30,10 +31,23 @@ public class NotificationServiceImpl implements NotificationService {
     }
 
     @Override
-    public void deleteNotification(Long id) {
+    public void deleteNotification(Long id, Seller seller) {
         Map<String, Long> map = new HashMap<>();
         map.put("id", id);
 
-        restTemplate.delete(notificationPathWithId, map);
+        if (getAllNotifications().stream().anyMatch(notification -> notification.getId() == id)) {
+            seller.setNotificationCount(seller.getNotificationCount()-1);
+            restTemplate.delete(notificationPathWithId, map);
+        }
+    }
+
+    @Override
+    public List<Notification> getMyNotifications(Long id) {
+        Map<String, Long> map = new HashMap<>();
+        map.put("id", id);
+
+        ResponseEntity<Notification[]> responseEntity =
+                restTemplate.getForEntity(notificationPathWithId+"/myNotifications", Notification[].class, map);
+        return Arrays.asList(responseEntity.getBody());
     }
 }

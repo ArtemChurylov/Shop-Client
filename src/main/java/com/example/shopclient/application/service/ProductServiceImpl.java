@@ -13,6 +13,7 @@ import org.springframework.web.multipart.MultipartFile;
 
 import java.io.IOException;
 import java.util.*;
+import java.util.stream.Collectors;
 
 @Service
 public class ProductServiceImpl implements ProductService {
@@ -138,5 +139,11 @@ public class ProductServiceImpl implements ProductService {
     public List<Product> getCosmetics() {
         ResponseEntity<Product[]> responseEntity = restTemplate.getForEntity(productPath+"/cosmetics", Product[].class);
         return Arrays.asList(responseEntity.getBody());
+    }
+
+    @Override
+    public List<Product> search(String result) {
+        return getAllProducts().stream().filter(product -> product.getTitle().toLowerCase().contains(result.toLowerCase()))
+                .collect(Collectors.toList());
     }
 }

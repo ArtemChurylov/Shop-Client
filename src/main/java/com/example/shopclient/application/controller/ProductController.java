@@ -161,4 +161,10 @@ public class ProductController {
         model.addAttribute("products", cosmetics);
         return "/application/mainPage";
     }
+
+    @GetMapping("/search")
+    public String search(@RequestParam("search") String result, Model model) {
+        model.addAttribute("products", productService.search(result));
+        return "application/mainPage";
+    }
 }

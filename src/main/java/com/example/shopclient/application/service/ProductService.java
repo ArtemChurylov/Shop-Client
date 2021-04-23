@@ -23,4 +23,6 @@ public interface ProductService {
     List<Product> getClothes();
     List<Product> getAccessories();
     List<Product> getCosmetics();
+
+    List<Product> search(String result);
 }

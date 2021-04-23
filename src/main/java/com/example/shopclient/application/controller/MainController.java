@@ -1,5 +1,6 @@
 package com.example.shopclient.application.controller;
 
+import com.example.shopclient.application.model.Product;
 import com.example.shopclient.application.service.NotificationService;
 import com.example.shopclient.application.service.ProductService;
 import com.example.shopclient.security.model.Client;
@@ -11,6 +12,9 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+
+import java.util.Collections;
+import java.util.List;
 
 @Controller
 public class MainController {
@@ -29,7 +33,10 @@ public class MainController {
             Seller seller = (Seller) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
             model.addAttribute("notifications_number", seller.getNotificationCount());
         }catch (Exception e){}
-        model.addAttribute("products", productService.getAllProducts());
+
+        List<Product> allProducts = productService.getAllProducts();
+        Collections.reverse(allProducts);
+        model.addAttribute("products", allProducts);
         return "application/mainPage";
     }
 

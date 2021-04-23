@@ -14,6 +14,8 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
 import javax.validation.Valid;
+import java.util.Collections;
+import java.util.List;
 
 @Controller
 @RequestMapping("/product")
@@ -110,5 +112,53 @@ public class ProductController {
         Client client = (Client) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
         model.addAttribute("orders", productService.getMyOrders(client.getId()));
         return "application/product/myOrders";
+    }
+
+    @GetMapping("/footwear")
+    public String showFootwear(Model model) {
+        try {
+            Seller seller = (Seller) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+            model.addAttribute("notifications_number", seller.getNotificationCount());
+        }catch (Exception e){}
+        List<Product> footwear = productService.getFootwear();
+        Collections.reverse(footwear);
+        model.addAttribute("products", footwear);
+        return "/application/mainPage";
+    }
+
+    @GetMapping("/clothes")
+    public String showClothes(Model model) {
+        try {
+            Seller seller = (Seller) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+            model.addAttribute("notifications_number", seller.getNotificationCount());
+        }catch (Exception e){}
+        List<Product> clothes = productService.getClothes();
+        Collections.reverse(clothes);
+        model.addAttribute("products", clothes);
+        return "/application/mainPage";
+    }
+
+    @GetMapping("/accessories")
+    public String showAccessories(Model model) {
+        try {
+            Seller seller = (Seller) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+            model.addAttribute("notifications_number", seller.getNotificationCount());
+        }catch (Exception e){}
+        List<Product> accessories = productService.getAccessories();
+        Collections.reverse(accessories);
+        model.addAttribute("products", accessories);
+        return "/application/mainPage";
+    }
+
+    @GetMapping("/cosmetics")
+    public String showCosmetics(Model model) {
+        try {
+            Seller seller = (Seller) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+            model.addAttribute("notifications_number", seller.getNotificationCount());
+        }catch (Exception e){}
+        List<Product> cosmetics = productService.getCosmetics();
+        Collections.reverse(cosmetics);
+        model.addAttribute("products", cosmetics);
+        return "/application/mainPage";
     }
 }

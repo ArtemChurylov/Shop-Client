@@ -115,4 +115,28 @@ public class ProductServiceImpl implements ProductService {
         dbProduct.setCategory(product.getCategory());
         restTemplate.put(productPath, dbProduct, Product.class);
     }
+
+    @Override
+    public List<Product> getFootwear() {
+        ResponseEntity<Product[]> responseEntity = restTemplate.getForEntity(productPath+"/footwear", Product[].class);
+        return Arrays.asList(responseEntity.getBody());
+    }
+
+    @Override
+    public List<Product> getClothes() {
+        ResponseEntity<Product[]> responseEntity = restTemplate.getForEntity(productPath+"/clothes", Product[].class);
+        return Arrays.asList(responseEntity.getBody());
+    }
+
+    @Override
+    public List<Product> getAccessories() {
+        ResponseEntity<Product[]> responseEntity = restTemplate.getForEntity(productPath+"/accessories", Product[].class);
+        return Arrays.asList(responseEntity.getBody());
+    }
+
+    @Override
+    public List<Product> getCosmetics() {
+        ResponseEntity<Product[]> responseEntity = restTemplate.getForEntity(productPath+"/cosmetics", Product[].class);
+        return Arrays.asList(responseEntity.getBody());
+    }
 }

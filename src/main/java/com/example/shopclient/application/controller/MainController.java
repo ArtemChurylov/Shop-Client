@@ -48,7 +48,7 @@ public class MainController {
         Client client = (Client) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
         model.addAttribute("name", client.getName());
         model.addAttribute("surname", client.getSurname());
-        return "/application/congratulationsPage";
+        return "application/congratulationsPage";
     }
 
     // Returns profile page

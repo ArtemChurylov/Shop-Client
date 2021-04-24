@@ -136,7 +136,7 @@ public class ProductController {
         List<Product> footwear = productService.getFootwear();
         Collections.reverse(footwear);
         model.addAttribute("products", footwear);
-        return "/application/mainPage";
+        return "application/mainPage";
     }
 
     // Returns page with all clothes
@@ -149,7 +149,7 @@ public class ProductController {
         List<Product> clothes = productService.getClothes();
         Collections.reverse(clothes);
         model.addAttribute("products", clothes);
-        return "/application/mainPage";
+        return "application/mainPage";
     }
 
     // Returns page with all accessories
@@ -162,7 +162,7 @@ public class ProductController {
         List<Product> accessories = productService.getAccessories();
         Collections.reverse(accessories);
         model.addAttribute("products", accessories);
-        return "/application/mainPage";
+        return "application/mainPage";
     }
 
     // Returns page with all cosmetics
@@ -175,7 +175,7 @@ public class ProductController {
         List<Product> cosmetics = productService.getCosmetics();
         Collections.reverse(cosmetics);
         model.addAttribute("products", cosmetics);
-        return "/application/mainPage";
+        return "application/mainPage";
     }
 
     // Returns page with search result

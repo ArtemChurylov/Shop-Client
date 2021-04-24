@@ -10,6 +10,8 @@ import java.lang.annotation.*;
 @Retention(RetentionPolicy.RUNTIME)
 public @interface ConfirmPassword {
 
+    // Validation to check if password and confirm password from form matches
+
     String message() default "Passwords dose`nt match.";
 
     Class<?>[] groups() default {};

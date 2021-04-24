@@ -17,6 +17,8 @@ import javax.validation.Valid;
 import java.util.Collections;
 import java.util.List;
 
+
+// Product Controller
 @Controller
 @RequestMapping("/product")
 public class ProductController {
@@ -27,6 +29,7 @@ public class ProductController {
         this.productService = productService;
     }
 
+    // If user has role SELLER he can add products
     @PreAuthorize("hasRole('SELLER')")
     @GetMapping("/add")
     public String addProductPage(Product product) {
@@ -44,6 +47,7 @@ public class ProductController {
         return "redirect:/";
     }
 
+    // Returns page with product details
     @GetMapping("/{id}")
     public String showProduct(@PathVariable Long id, Model model) {
         try {
@@ -55,6 +59,8 @@ public class ProductController {
         return "application/product/showProduct";
     }
 
+    // If user has role CLIENT he can buy product, sellers can`t buy products
+    // Returns page with address form
     @PreAuthorize("hasRole('CLIENT')")
     @GetMapping("/buy/{id}")
     public String buyProductPage(@PathVariable Long id, Address address, Model model) {
@@ -70,6 +76,7 @@ public class ProductController {
         return "redirect:/congratulationsPage";
     }
 
+    // Returns page with seller products
     @PreAuthorize("hasRole('SELLER')")
     @GetMapping("/myProducts")
     public String myProducts(Model model) {
@@ -79,6 +86,7 @@ public class ProductController {
         return "application/product/myProducts";
     }
 
+    // Returns page for editing product
     @PreAuthorize("hasRole('SELLER')")
     @GetMapping("/{id}/edit")
     public String editProductPage(@PathVariable Long id, Model model) {
@@ -99,6 +107,7 @@ public class ProductController {
         return "redirect:/product/myProducts";
     }
 
+    // Send request for deleting product
     @PreAuthorize("hasRole('SELLER')")
     @PostMapping("/{id}/delete")
     public String deleteProduct(@PathVariable Long id) {
@@ -106,14 +115,18 @@ public class ProductController {
         return "redirect:/product/myProducts";
     }
 
+    // Returns page with products which client has bought
     @PreAuthorize("hasRole('CLIENT')")
     @GetMapping("/myOrders")
     public String showClientOrders(Model model) {
         Client client = (Client) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-        model.addAttribute("orders", productService.getMyOrders(client.getId()));
+        List<Product> myOrders = productService.getMyOrders(client.getId());
+        Collections.reverse(myOrders);
+        model.addAttribute("orders", myOrders);
         return "application/product/myOrders";
     }
 
+    // Returns page with all footwear
     @GetMapping("/footwear")
     public String showFootwear(Model model) {
         try {
@@ -126,6 +139,7 @@ public class ProductController {
         return "/application/mainPage";
     }
 
+    // Returns page with all clothes
     @GetMapping("/clothes")
     public String showClothes(Model model) {
         try {
@@ -138,6 +152,7 @@ public class ProductController {
         return "/application/mainPage";
     }
 
+    // Returns page with all accessories
     @GetMapping("/accessories")
     public String showAccessories(Model model) {
         try {
@@ -150,6 +165,7 @@ public class ProductController {
         return "/application/mainPage";
     }
 
+    // Returns page with all cosmetics
     @GetMapping("/cosmetics")
     public String showCosmetics(Model model) {
         try {
@@ -162,6 +178,7 @@ public class ProductController {
         return "/application/mainPage";
     }
 
+    // Returns page with search result
     @GetMapping("/search")
     public String search(@RequestParam("search") String result, Model model) {
         model.addAttribute("products", productService.search(result));

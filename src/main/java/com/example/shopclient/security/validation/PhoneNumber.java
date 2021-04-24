@@ -9,6 +9,9 @@ import java.lang.annotation.*;
 @Target(ElementType.FIELD)
 @Retention(RetentionPolicy.RUNTIME)
 public @interface PhoneNumber {
+
+    // Validation for phone number
+
     String message() default "This phone number is not valid.";
 
     Class<?>[] groups() default {};

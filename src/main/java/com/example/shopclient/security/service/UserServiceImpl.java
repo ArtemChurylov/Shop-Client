@@ -14,10 +14,10 @@ import java.util.*;
 @Service
 public class UserServiceImpl implements UserService {
 
-    private final static String clientPath = "http://localhost:8080/service/client";
-    private final static String clientPathWithId = "http://localhost:8080/service/client/{id}";
-    private final static String sellerPath = "http://localhost:8080/service/seller";
-    private final static String sellerPathWithId = "http://localhost:8080/service/seller/{id}";
+    private final static String clientPath = "https://shop-server-artem.herokuapp.com/service/client";
+    private final static String clientPathWithId = "https://shop-server-artem.herokuapp.com/service/client/{id}";
+    private final static String sellerPath = "https://shop-server-artem.herokuapp.com/service/seller";
+    private final static String sellerPathWithId = "https://shop-server-artem.herokuapp.com/service/seller/{id}";
 
     private final RestTemplate restTemplate = new RestTemplate();
     private final PasswordEncoder passwordEncoder;
@@ -26,6 +26,7 @@ public class UserServiceImpl implements UserService {
         this.passwordEncoder = passwordEncoder;
     }
 
+    // Send request to save Client
     @Override
     public void saveClient(TempUser tempUser) {
         Client client = new Client();
@@ -38,12 +39,14 @@ public class UserServiceImpl implements UserService {
         restTemplate.postForEntity(clientPath, client, Client.class);
     }
 
+    // Send request to get all clients
     @Override
     public List<Client> getAllClients() {
         ResponseEntity<Client[]> responseEntity = restTemplate.getForEntity(clientPath, Client[].class);
         return Arrays.asList(responseEntity.getBody());
     }
 
+    // Send request to get client by id
     @Override
     public Client getClientById(Long id) {
         Map<String, Long> map = new HashMap<>();
@@ -53,6 +56,7 @@ public class UserServiceImpl implements UserService {
         return client;
     }
 
+    // Send request to delete client by id
     @Override
     public void deleteClientById(Long id) {
         Map<String, Long> map = new HashMap<>();
@@ -61,6 +65,7 @@ public class UserServiceImpl implements UserService {
         restTemplate.delete(clientPathWithId, map);
     }
 
+    // Send request to save seller
     @Override
     public void saveSeller(TempUser tempUser) {
         Seller seller = new Seller();
@@ -73,12 +78,14 @@ public class UserServiceImpl implements UserService {
         restTemplate.postForEntity(sellerPath, seller, Seller.class);
     }
 
+    // Send request to get all sellers
     @Override
     public List<Seller> getAllSellers() {
         ResponseEntity<Seller[]> responseEntity = restTemplate.getForEntity(sellerPath, Seller[].class);
         return Arrays.asList(responseEntity.getBody());
     }
 
+    // Send request to get seller by id
     @Override
     public Seller getSellerById(Long id) {
         Map<String, Long> map = new HashMap<>();
@@ -88,6 +95,7 @@ public class UserServiceImpl implements UserService {
         return seller;
     }
 
+    // Send request to delete seller by id
     @Override
     public void deleteSellerById(Long id) {
         Map<String, Long> map = new HashMap<>();
@@ -96,6 +104,7 @@ public class UserServiceImpl implements UserService {
         restTemplate.delete(sellerPathWithId, map);
     }
 
+    // Send request to update user
     @Override
     public void updateUser(TempUser tempUser) {
         try {
@@ -117,6 +126,7 @@ public class UserServiceImpl implements UserService {
         }
     }
 
+    // Send request to update user password
     @Override
     public void changePassword(TempUser tempUser) {
         try {
@@ -132,6 +142,7 @@ public class UserServiceImpl implements UserService {
         }
     }
 
+    // Find user by email
     @Override
     public UserDetails loadUserByUsername(String email) throws UsernameNotFoundException {
         Optional<Client> client = getAllClients().stream().filter(c -> c.getEmail().equals(email)).findFirst();

@@ -3,6 +3,7 @@ package com.example.shopclient.application.model;
 import com.example.shopclient.security.model.Seller;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
+// Notification model
 public class Notification {
 
     @JsonProperty("id")

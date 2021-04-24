@@ -10,6 +10,8 @@ import java.lang.annotation.*;
 @Retention(RetentionPolicy.RUNTIME)
 public @interface UniqueEmail {
 
+    // Validation to check if input email is unique
+
     String message() default "This email is already taken.";
 
     Class<?>[] groups() default {};

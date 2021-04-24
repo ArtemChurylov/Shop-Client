@@ -27,6 +27,7 @@ public class MainController {
         this.notificationService = notificationService;
     }
 
+    // Returns main page. If logged in user have role SELLER, add notificationCount to model
     @GetMapping("/")
     public String mainPage(Model model) {
         try {
@@ -40,6 +41,7 @@ public class MainController {
         return "application/mainPage";
     }
 
+    // Returns congratulationsPage after client buy the product
     @PreAuthorize("hasRole('CLIENT')")
     @GetMapping("congratulationsPage")
     public String congratulationsPage(Model model) {
@@ -49,6 +51,7 @@ public class MainController {
         return "/application/congratulationsPage";
     }
 
+    // Returns profile page
     @GetMapping("/profile")
     public String profileDetails(Model model) {
         try {
@@ -64,6 +67,7 @@ public class MainController {
         return "application/profile";
     }
 
+    // Returns page with notifications
     @PreAuthorize("hasRole('SELLER')")
     @GetMapping("/notifications")
     public String notifications(Model model){
@@ -73,6 +77,7 @@ public class MainController {
         return "application/notifications";
     }
 
+    // Send request for delete notification and redirect
     @PreAuthorize("hasRole('SELLER')")
     @PostMapping("/deleteNotification/{id}")
     public String deleteNotification(@PathVariable Long id) {
@@ -81,6 +86,7 @@ public class MainController {
         return "redirect:/notifications";
     }
 
+    // Show this page if product image != jpg or png
     @GetMapping("/fileTypeException")
     public String fileTypeException() {
         return "exception/fileTypeException";

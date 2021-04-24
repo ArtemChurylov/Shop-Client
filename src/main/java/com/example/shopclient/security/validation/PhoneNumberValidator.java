@@ -9,6 +9,7 @@ public class PhoneNumberValidator implements ConstraintValidator<PhoneNumber, St
 
     }
 
+    // It can startsWith '+' and should be numeric
     @Override
     public boolean isValid(String s, ConstraintValidatorContext constraintValidatorContext) {
         boolean isValid = true;

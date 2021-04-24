@@ -10,6 +10,7 @@ import javax.validation.constraints.Size;
 import java.util.Date;
 import java.util.Set;
 
+// Product model
 public class Product {
 
     @JsonProperty("id")

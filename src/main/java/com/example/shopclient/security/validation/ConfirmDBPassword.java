@@ -9,6 +9,9 @@ import java.lang.annotation.*;
 @Target({ElementType.FIELD})
 @Retention(RetentionPolicy.RUNTIME)
 public @interface ConfirmDBPassword {
+
+    // Validation to check if input password and db password matches
+
     String message() default "Incorrect password.";
 
     Class<?>[] groups() default {};

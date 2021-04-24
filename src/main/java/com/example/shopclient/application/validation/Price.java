@@ -10,6 +10,8 @@ import java.lang.annotation.*;
 @Retention(RetentionPolicy.RUNTIME)
 public @interface Price {
 
+    // Custom annotation for validating price field
+
     String message() default "Invalid type";
 
     Class<?>[] groups() default {};

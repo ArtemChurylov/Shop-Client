@@ -10,6 +10,8 @@ import javax.validation.constraints.Email;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.Size;
 
+
+// User to validate form
 @UniqueEmail
 @ConfirmPassword
 public class TempUser {

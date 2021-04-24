@@ -2,6 +2,8 @@ package com.example.shopclient.application.model;
 
 import javax.validation.constraints.NotEmpty;
 
+
+// Address model
 public class Address {
 
     @NotEmpty

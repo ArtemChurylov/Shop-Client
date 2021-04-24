@@ -22,11 +22,13 @@ public class SecurityController {
         this.userService = userService;
     }
 
+    // Returns login page
     @GetMapping("/login")
     public String loginPage() {
         return "security/loginPage";
     }
 
+    // Returns page for registration clients
     @GetMapping("/registration/client")
     public String registrationClientPage(TempUser tempUser) {
         return "security/registrationClientPage";
@@ -39,6 +41,7 @@ public class SecurityController {
         return "redirect:/";
     }
 
+    // Returns page for registration sellers
     @GetMapping("/registration/seller")
     public String registrationSellerPage(TempUser tempUser) {
         return "security/registrationSellerPage";
@@ -51,6 +54,7 @@ public class SecurityController {
         return "redirect:/";
     }
 
+    // Returns updating user page
     @GetMapping("/user/update")
     public String updateProfilePage(TempUser tempUser, Model model) {
         try {
@@ -86,6 +90,7 @@ public class SecurityController {
         return "redirect:/profile";
     }
 
+    // Returns page for changing password
     @GetMapping("/user/changePassword")
     public String changePasswordPage(TempUser tempUser, Model model) {
         try {
